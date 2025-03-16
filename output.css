@@ -3023,6 +3023,10 @@ video {
     line-height: 1.75rem;
   }
 
+  .sm\:text-\[14px\] {
+    font-size: 14px;
+  }
+
   .sm\:font-medium {
     font-weight: 500;
   }

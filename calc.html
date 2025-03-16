@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qiymət Təklifi AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="output.css">
+    <style>
+        input[type="range"] {
+            -webkit-appearance: none;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            background-image: linear-gradient(to right, #a855f7, #a855f7);
+            background-repeat: no-repeat;
+            background-size: 0% 100%;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #a855f7;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #a855f7;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e5e7eb;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.toggle-slider {
+            background-color: #a855f7;
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(24px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-gray-100 font-sans min-h-screen p-4">
+        <div class="mx-auto max-w-[1300px]">
+            <div class="flex flex-col md:flex-row justify-center items-stretch gap-6">
+                <!-- Qiymət Təklifi AI Section -->
+                <div class="font-sans w-full max-w-4xl p-4">
+                    <div class="bg-white  shadow-lg mb-6">
+                        <div class="bg-gradient-to-r from-purple-600 to-purple-800 text-white p-6 rounded-t-2xl">
+                            <h1 class="text-3xl font-bold">Qiymət Təklifi AI</h1>
+                            <p class="mt-2 opacity-90">Layihənizin qiymətini hesablayın</p>
+                        </div>
+
+                        <div class="p-8">
+                            <div>
+                                <h2 class="text-xl font-semibold mb-6 text-gray-800 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-purple-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                    Statik səhifələr
+                                </h2>
+
+                                <div class="bg-gray-50 p-8 rounded-xl border border-gray-100">
+                                    <div class="mb-8">
+                                        <label class="block text-gray-700 mb-3 font-medium">Neçə statik səhifə olacaq?</label>
+                                        <div class="flex items-center space-x-5">
+                                            <span id="pageCountDisplay"
+                                                class="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-purple-600 to-purple-800 text-white font-medium rounded-xl shadow-md">
+                                                1
+                                            </span>
+                                            <div class="w-full">
+                                                <input type="range" min="1" max="20" value="4" id="pageCountSlider"
+                                                    class="w-full rounded-lg cursor-pointer" />
+                                            </div>
+                                            <span
+                                                class="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-purple-600 to-purple-800 text-white font-medium rounded-xl shadow-md">
+                                                20
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-8">
+                                        <label class="block text-gray-700 mb-3 font-medium">Dizayn mürəkkəblik:</label>
+                                        <div class="flex flex-col space-y-3">
+                                            <input type="range" min="1" max="3" value="1" id="designComplexitySlider"
+                                                class="w-full rounded-lg cursor-pointer" />
+                                            <div class="flex justify-between text-sm font-medium">
+                                                <span class="text-gray-600">Sadə</span>
+                                                <span class="text-gray-600">Orta</span>
+                                                <span class="text-gray-600">Xüsusi</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="bg-gradient-to-r from-blue-50 to-purple-50 p-5 rounded-xl border border-blue-100 flex justify-between items-center">
+                                        <span class="text-gray-700 font-medium flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            Xərc:
+                                        </span>
+                                        <span id="staticPagesTotalPrice" class="text-purple-700 text-2xl font-bold">
+                                            4 səhifə / ₼ 400
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Features Section -->
+                            <div class="bg-white ">
+                                <h1 class="text-xl font-semibold p-6 border-b border-gray-200">Veb sayt əlavələri</h1>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-6" id="featuresContainer">
+                                    <!-- Features will be populated by JavaScript -->
+                                </div>
+
+                                <div
+                                    class="bg-blue-50 p-6  flex justify-between items-center border-t border-blue-100 rounded-b-xl">
+                                    <span class="text-gray-700 font-medium">Ümumi Xərc:</span>
+                                    <span class="text-purple-700 text-2xl font-bold">₼ <span id="totalPrice">0</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white ">
+                            <h1 class="text-xl font-semibold p-6 border-b border-gray-200">Axtarış motorunun optimallaşdırılması
+                            </h1>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-6" id="searchOption">
+                                <!-- Features will be populated by JavaScript -->
+                            </div>
+
+                            <div class="bg-blue-50 p-6  mx-[25px] flex justify-between items-center border-t border-blue-100 rounded-b-xl">
+                                <span class="text-gray-700 font-medium">Ümumi Xərc:</span>
+                                <span class="text-purple-700 text-2xl font-bold">₼ <span id="searchTotal">0</span></span>
+                            </div>
+                        </div>
+                        <div class="bg-white ">
+                            <h1 class="text-xl font-semibold p-6 border-b border-gray-200">Elektron ticarət əlavələri
+                            </h1>
+
+                            <div class="grid grid-cols-2 gap-4 p-6" id="elektronTicaret">
+                                <!-- Features will be populated by JavaScript -->
+                            </div>
+
+                            <div class="bg-blue-50 p-6 mx-[25px] flex justify-between items-center border-t border-blue-100 rounded-b-xl">
+                                <span class="text-gray-700 font-medium">Ümumi Xərc:</span>
+                                <span class="text-purple-700 text-2xl font-bold">₼ <span id="elektronTotalPrice">0</span></span>
+                            </div>
+                        </div>
+                        <!-- Logo Dizaynı Section -->
+                        <div class="bg-white ">
+                            <h1 class="text-xl font-semibold p-6 border-b border-gray-200">Logo Dizaynı</h1>
+
+                            <div class=" p-6  border border-gray-100">
+                                <div class="mb-8">
+                                    <label class="block text-gray-700 mb-3 font-medium">Dizayn Mürəkkəbliyi:</label>
+                                    <div class="flex flex-col space-y-3">
+                                        <input type="range" min="0" max="2" value="0" id="logoComplexitySlider"
+                                            class="w-full rounded-lg cursor-pointer" />
+                                        <div class="flex justify-between text-sm font-medium">
+                                            <span class="text-gray-600">Ehtiyaç yoxdur</span>
+                                            <span class="text-gray-600">Sadə</span>
+                                            <span class="text-gray-600">Xüsusi</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="bg-gradient-to-r from-blue-50 to-purple-50 p-5 rounded-xl border border-blue-100 flex justify-between items-center">
+                                    <span class="text-gray-700 font-medium flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-purple-600" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Xərc:
+                                    </span>
+                                    <span id="logoCost" class="text-purple-700 text-2xl font-bold">₼ 0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teklifiniz Section -->
+                <div class="bg-white w-full md:w-[400px] md:h-[500px] rounded-b-2xl shadow-lg p-6 mt-6">
+                    <h2 class="text-2xl font-bold text-purple-700 mb-4">Teklifiniz</h2>
+
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Statik səhifələr:</span>
+                            <span id="staticPagesCost" class="text-purple-700 font-bold">↑ 0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Əlavələr:</span>
+                            <span id="featuresCost" class="text-purple-700 font-bold">↑ 0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">SEO:</span>
+                            <span id="seoCost" class="text-purple-700 font-bold">↑ 0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">E-ticarət:</span>
+                            <span id="eCommerceCost" class="text-purple-700 font-bold">↑ 0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Logo dizaynı:</span>
+                            <span id="logoCostDisplay" class="text-purple-700 font-bold">↑ 0</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <p class="text-sm text-gray-600">
+                            <strong>Qeyd:</strong> Minimum sayt qiyməti ↑ 450
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700 font-bold">Ümumi təxmini dəyəri:</span>
+                            <span id="totalCost" class="text-purple-700 text-2xl font-bold">↑ 0</span>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <button class="w-full bg-purple-600 text-white py-3 px-6 rounded-lg hover:bg-purple-700 transition duration-300">
+                            Saytınızı İndi Sifariş Edin
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <script src="calc.js"></script>
+</body>
+
+</html>
